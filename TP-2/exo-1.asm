@@ -26,8 +26,7 @@ loop3           addq.l  #1,d3
 				
 				clr.l   d4
 				moveq.l #10,d0
-
-loop4           addq.l  #1,d4
+`
 				addq.l  #1,d0
 				cmpi.l  #30,d0
 				bne     loop4
