@@ -1,4 +1,4 @@
-FNAME = str-len
+FNAME = LowerCount
 SRC = ${FNAME}.asm
 build : 
 	a68k ${SRC} -o${FNAME}.hex -s -n -rmal
@@ -6,5 +6,5 @@ build :
 run : build
 	d68k ${FNAME}.hex
 
-clear :
-	rm -f ${FNAME}.hex
+clean :
+	@rm -vf *.hex
