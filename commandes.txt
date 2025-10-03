@@ -1,0 +1,1 @@
+f_name.asm -of_name.hex -s -n -rmal
