@@ -88,38 +88,32 @@ IsCharError     move.l      a0,-(a7)
                 rts
 
                 
-IsMaxError      move.l      a0,-(a7)
+IsMaxError      movem.l      d0/a0,-(a7)
 
                 jsr         StrLen
                 cmp.l       #5,d0
-                bmi         \false         ; branch si len(str) < 5
-                cmp.l       #5,d0
-                bpl         \false         ; branch si len(str) > 5
+                bhi         \true         ; branch si len(str) > 5
+                blo         \false         ; branch si len(str) < 5
                                         
-                cmp.b       #'3',(a0)
-                bmi         \false
-                cmp.b       #'3',-(a0)
-                bpl         \true
-                cmp.b       #'2',(a0)
-
-                bmi         \false
-                cmp.b       #'2',-(a0)
-                bpl         \true
+                cmp.b       #'3',(a0)+
+                bhi         \true         ; branch si len(str) > 5
+                blo         \false         ; branch si len(str) < 5
                 
-                cmp.b       #'7',(a0)
-                bmi         \false
-                cmp.b       #'7',-(a0)
-                bpl         \true
+                cmp.b       #'2',(a0)+
+                bhi         \true         ; branch si len(str) > 5
+                blo         \false         ; branch si len(str) < 5
+                
+                cmp.b       #'7',(a0)+
+                bhi         \true         ; branch si len(str) > 5
+                blo         \false         ; branch si len(str) < 5
 
-                cmp.b       #'6',(a0)
-                bmi         \false
-                cmp.b       #'6',-(a0)
-                bpl         \true
+                cmp.b       #'6',(a0)+
+                bhi         \true         ; branch si len(str) > 5
+                blo         \false         ; branch si len(str) < 5
 
-                cmp.b       #'7',(a0)
-                bmi         \false
-                cmp.b       #'7',(a0)
-                bpl         \true
+                cmp.b       #'7',(a0)+
+                bhi         \true         ; branch si len(str) > 5
+                blo         \false         ; branch si len(str) < 5
 
                 bra \false
 
@@ -131,7 +125,7 @@ IsMaxError      move.l      a0,-(a7)
 \false          andi.b #%11111011,ccr ; Positionne le flag Z à 0 (false).
                 bra         \quit
 
-\quit           move.l      (a7)+,a0
+\quit           movem.l      (a7)+,d0/a0
                 rts
 
 
